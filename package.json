@@ -1,0 +1,33 @@
+{
+  "name": "cardano-fluree",
+  "version": "1.0.0",
+  "description": "This aims at integrating Cardano blockchain with FlureeDB",
+  "main": "index.js",
+  "scripts": {
+    "dev" : "npm install && node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamantas/cardano-fluree.git"
+  },
+  "keywords": [
+    "Cardano",
+    "Fluree"
+  ],
+  "author": "Dmitri Safine, Manik Jain",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adamantas/cardano-fluree/issues"
+  },
+  "homepage": "https://github.com/adamantas/cardano-fluree#readme",
+  "dependencies": {
+    "@fluree/flureedb": "^0.16.0",
+    "@fluree/flureenjs": "^1.0.0-rc15",
+    "dotenv": "^8.6.0",
+    "properties-reader": "^2.2.0",
+    "ws": "^7.4.5",
+    "xmlhttprequest": "^1.8.0"
+  }
+}
