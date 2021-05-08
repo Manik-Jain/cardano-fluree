@@ -79,6 +79,11 @@ If your shell is not ZSH, then use `.bash_profile` for Bash, or whatever it is f
 
 ## Launching the cardano node stack
 
+Make sure that you are calling the following commands from the `cdk` directory
+```
+$ cd cdk
+```
+
 ### Launch cardano node
 ```
 $ cdk deploy CardanoNodeStack
