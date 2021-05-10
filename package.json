@@ -26,6 +26,7 @@
     "@fluree/flureedb": "^0.16.0",
     "@fluree/flureenjs": "^1.0.0-rc15",
     "dotenv": "^8.6.0",
+    "kafkajs": "^1.15.0",
     "properties-reader": "^2.2.0",
     "typescript": "^4.2.4",
     "ws": "^7.4.5",
