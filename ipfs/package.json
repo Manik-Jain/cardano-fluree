@@ -1,0 +1,31 @@
+{
+  "name": "cardno-ipfs",
+  "version": "1.0.0",
+  "description": "This package aims at storing NFT binaries on IPFS",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamantas/cardano-fluree.git"
+  },
+  "keywords": [
+    "IPFS",
+    "Cardano",
+    "Cardano-IPFS",
+    "cardano-ipfs"
+  ],
+  "author": "Manik Jain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adamantas/cardano-fluree/issues"
+  },
+  "homepage": "https://github.com/adamantas/cardano-fluree#readme",
+  "dependencies": {
+    "nft.storage": "^1.1.0",
+    "path": "^0.12.7",
+    "properties-reader": "^2.2.0"
+  }
+}
