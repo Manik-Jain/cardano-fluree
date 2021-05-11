@@ -1,0 +1,28 @@
+{
+  "name": "cmds",
+  "version": "1.0.0",
+  "description": "This package aims at executing Cardano-cli from nodejs project",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamantas/cardano-fluree.git"
+  },
+  "keywords": [
+    "cardano-cli",
+    "cardano-node"
+  ],
+  "author": "Manik Jain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adamantas/cardano-fluree/issues"
+  },
+  "homepage": "https://github.com/adamantas/cardano-fluree#readme",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "node-cmd": "^4.0.0"
+  }
+}
