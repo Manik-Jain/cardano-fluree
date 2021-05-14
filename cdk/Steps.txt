@@ -1,0 +1,78 @@
+//https://vote.crypto2099.io/how-to/submit-a-metadata-transaction/
+
+1. Generate Payment Keys [payment.vkey and payment.skey]
+cardano-cli shelley address key-gen --verification-key-file payment.vkey --signing-key-file payment.skey
+cardano-cli shelley address key-gen --verification-key-file payment2.vkey --signing-key-file payment2.skey
+
+2. Generate payment address
+cardano-cli shelley address build --payment-verification-key-file payment.vkey --out-file payment.addr --testnet-magic 1097911063
+cardano-cli shelley address build --payment-verification-key-file payment2.vkey --out-file payment2.addr --testnet-magic 1097911063
+
+3. Get test ADA from Faucet
+cardano-cli query utxo --address $(cat payment.addr) --testnet-magic 1097911063
+cardano-cli query utxo --address $(cat payment2.addr) --testnet-magic 1097911063
+
+4. export CARDANO_NODE_SOCKET_PATH
+export CARDANO_NODE_SOCKET_PATH=${PWD}/node.socket
+
+5. Create protocol.json file, which is needed to create txns 
+cardano-cli query protocol-parameters --testnet-magic 1097911063 --out-file protocol.json
+
+6. Find TTL
+cardano-cli shelley query tip --testnet-magic 1097911063
+
+7. 
+a) find the utxo for ur account bu querying from step 3
+b)Txn Draft
+cardano-cli shelley transaction build-raw \
+--tx-in 956fe9ac00325aadadc6b7a9acfbc1fea371ad09fdb90203d6668f8523f2e7b5#0 \
+--tx-out $(cat payment2.addr)+10 \
+--tx-out $(cat payment.addr)+0 \
+--ttl 0 \
+--fee 0 \
+--out-file tx.raw
+
+
+8. Calculate txn fee. We need the tx.raw file and protocol json file
+cardano-cli shelley transaction calculate-min-fee \
+--tx-body-file tx.draft \
+--tx-in-count 1 \
+--tx-out-count 1 \
+--witness-count 1 \
+--byron-witness-count 0 \
+--testnet-magic 1097911063 \
+--protocol-params-file protocol.json
+
+9. build txn with actual values now
+a) find out the slot number from query 6
+b) find out the refund to account1 by => expr ActualBalance - Fees - transfer
+
+cardano-cli shelley transaction build-raw \
+--tx-in d4be75bc60e479f538d2178dce4c40cb441e0c0ae583d6841504f622fdddd613#1 \
+--tx-out $(cat payment2.addr)+10 \
+--tx-out $(cat payment.addr)+999824501 \
+--ttl 26500000 \
+--fee  175489 \
+--out-file tx.draft
+
+cardano-cli shelley transaction build-raw \
+--tx-in 956fe9ac00325aadadc6b7a9acfbc1fea371ad09fdb90203d6668f8523f2e7b5#0 \
+--tx-out $(cat payment.addr)+999824599 \
+--metadata-json-file metadata.json \
+--ttl 26500000 \
+--fee 175401 \
+--out-file tx.draft
+
+//999824599
+
+10. Sign the transaction
+cardano-cli shelley transaction sign \
+--tx-body-file tx.draft  \
+--signing-key-file payment.skey \
+--testnet-magic 1097911063  \
+--out-file txn.signed
+
+11. Submit
+cardano-cli transaction submit \
+--tx-file txn.signed \
+--testnet-magic 1097911063

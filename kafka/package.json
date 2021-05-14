@@ -5,14 +5,16 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start:consumer" : "node ./consumer/index.js",
-    "dev" : "node index.js",
+    "start:consumer": "node ./consumer/index.js",
+    "dev": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "avsc": "^5.7.0",
-    "node-rdkafka": "^2.10.1"
+    "fs": "0.0.1-security",
+    "node-rdkafka": "^2.10.1",
+    "path": "^0.12.7"
   }
 }

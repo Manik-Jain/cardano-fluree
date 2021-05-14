@@ -1,36 +1,37 @@
 {
-  "name": "cardano-fluree",
+  "name": "api",
   "version": "1.0.0",
-  "description": "This aims at integrating Cardano blockchain with FlureeDB",
+  "description": "Gateway to interact with Front-end and backend",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "npm install && node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/adamantas/cardano-fluree.git"
   },
   "keywords": [
-    "Cardano",
-    "Fluree"
+    "cardano"
   ],
-  "author": "Dmitri Safine, Manik Jain",
-  "license": "MIT",
+  "author": "Manik Jain",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/adamantas/cardano-fluree/issues"
   },
   "homepage": "https://github.com/adamantas/cardano-fluree#readme",
   "dependencies": {
-    "@fluree/flureedb": "^0.16.0",
-    "@fluree/flureenjs": "^1.0.0-rc15",
-    "dotenv": "^8.6.0",
+    "axios": "^0.21.1",
+    "curl-to-json-object": "0.0.3",
     "express": "^4.17.1",
-    "kafkajs": "^1.15.0",
+    "fs": "0.0.1-security",
+    "got": "^11.8.2",
+    "http-status-codes": "^2.1.4",
+    "morgan": "^1.10.0",
+    "node-cmd": "^4.0.0",
+    "nodemon": "^2.0.7",
+    "path": "^0.12.7",
     "properties-reader": "^2.2.0",
-    "typescript": "^4.2.4",
-    "ws": "^7.4.5",
-    "xmlhttprequest": "^1.8.0"
+    "request": "^2.88.2"
   }
 }

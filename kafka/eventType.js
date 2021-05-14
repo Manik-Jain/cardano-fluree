@@ -23,6 +23,42 @@ export default avro.Type.forSchema({
     {
       name: 'name',
       type: 'string',
+    },
+    {
+      name : 'imageUrl',
+      type : 'string'
+    },
+    {
+      name : 'artist',
+      type : 'string'
+    }, 
+    {
+      name : 'materials',
+      type : 'string'
+    },
+    {
+      name : 'dimensions',
+      type : 'string'
+    },
+    {
+      name : 'weight',
+      type : 'string'
+    },
+    {
+      name : 'story',
+      type : 'string'
+    },
+    {
+      name : 'significance',
+      type : 'string'
+    },
+    {
+      name : 'availability',
+      type : 'string'
+    },
+    {
+      name : 'date',
+      type : 'string'
     }
   ]
 });

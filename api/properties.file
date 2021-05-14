@@ -1,0 +1,9 @@
+app.port=3001
+app.secret=0PTsIIb+mRmzCbGfU6Vus2jVllom1fJ9Yu6x8HdUisjjXSfo1lQOA+LHIbGhB2mbn8N9N1FT7mI8oeqzli8oei9ff7BqkwfIwDoLLoyN1+kxL54oM9V3uOyEX2vjk68PX4a/Es92U3YXAHb46qGP3KZKAb5YR6qlFBIVSdAM8q8=
+app.id=yIiASEfGiDNeVjPhydXIjRX8Y5Mdw2PA
+
+app.url=https://cardano-testnet.blockfrost.io/api/v0/txs/hash/metadata
+
+logger.file=logger/app.log
+logger.access=logger/access.log
+logger.timeStamp.format=[YYYY:MM:DDTHH:mm:ss]

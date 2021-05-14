@@ -4,15 +4,20 @@ export default class FlureeCrud {
 
     async create(flureedb, ledgerName) {
         console.log('Creating new Ledger...')
-        let ledger = await flureenjs.new_ledger(flureedb, ledgerName)
-        console.log(`Ledger Created with id : [${ledger.result}]`)
+        let ledger;
+         try {
+            ledger = await flureenjs.new_ledger(flureedb, ledgerName);
+            console.log(`Ledger Created with id : [${ledger.result}]`)
+         } catch(error) {
+             console.error(`Ledger already exists`)
+         }
         return ledger
     }
 
     async insert(flureedb, ledgerName, data) {
         var result = await flureenjs.transact(flureedb, ledgerName, data);
         console.log(`Data inserted with id : [${result.id}]`);
-        return result
+        return result.id
     }
 
     async read(flureedb, ledgerName, from) {
