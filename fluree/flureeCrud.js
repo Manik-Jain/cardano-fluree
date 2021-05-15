@@ -16,20 +16,34 @@ export default class FlureeCrud {
 
     async insert(flureedb, ledgerName, data) {
         var result = await flureenjs.transact(flureedb, ledgerName, data);
-        console.log(`Data inserted with id : [${result.id}]`);
+        console.log(result)
+        console.log(`Data inserted with id : [${result.flakes[0][0]}]`);
         return result.id
     }
 
-    async read(flureedb, ledgerName, from) {
+    async read(flureedb, ledgerName, from, filter) {
         console.log(`Reading Data from [${ledgerName}...]`)
         var db = await flureenjs.db(flureedb, ledgerName)
         var myQuery  = {
-            select  : ['*'],
+            select  : ["name", 
+                        "weight", 
+                        "availability", 
+                        "artist", 
+                        "materials", 
+                        "date",
+                        "significance",
+                        "story",
+                        "dimensions"],
             from    :   from
         };
         var result = await flureenjs.query(db, myQuery)
-        console.log(result)
-        return result
+        let filtered = result.filter((value) => value._id === filter)
+
+        if(filtered) {
+            delete filtered[0]._id
+        }
+
+        return filtered
     }
 
     async delete(flureedb, ledgerName) {

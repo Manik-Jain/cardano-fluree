@@ -24,10 +24,7 @@ export default class CardanoMessageProducer {
     }
 
     async queue(message) {
-        //console.log('parse', JSON.parse(message))
-        console.log('stringify', JSON.stringify(message))
         console.log(`Queueing new message....${JSON.stringify(message)}`)
-        
         const success = await stream.write(eventType.toBuffer(message));
         success ? console.log(`message queued (${JSON.stringify(message)})`) : 
             console.log('Too many messages in the queue already..');

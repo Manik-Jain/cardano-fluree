@@ -1,1 +1,2 @@
 url=http://localhost:8090
+queryUrl=http://localhost:8090/fdb/test/cardano-nft/query

@@ -14,11 +14,17 @@ import KafkaConfig from '../config.js'
 import eventType from '../eventType.js'
 import CardanoProcessor from '../processor/index.js'
 import NFTDataStore from '../../ipfs/NFTDataStore.js'
+import _ from 'lodash';
+import SignAndVerify from '../../fluree/signAndVerify.js'
+import propertiesReader from 'properties-reader';
 
+var properties = propertiesReader('./properties.file');
 let kafkaConfig = new KafkaConfig();
 let cardanoProcessor = new CardanoProcessor();
 let nftDataStore = new NFTDataStore();
 let fileHandler = new FileHandler();
+let cryptoUtil = new SignAndVerify();
+
 const consumer = kafkaConfig.consumer();
 
 ( 
@@ -30,7 +36,6 @@ const consumer = kafkaConfig.consumer();
     consumer.consume();
   }).on('data', async (data) => 
       await publish(data)
-      //cardanoProcessor.process(parseData(data))
   )
 })();
 
@@ -42,11 +47,25 @@ async function publish(data) {
   console.log(image)
   delete parsedData.imageUrl
 
+  let selected = _.pick(parsedData, ['name', 
+                                    'materials', 
+                                    'dimensions', 
+                                    'weight', 
+                                    'story', 
+                                    'significance', 
+                                    'availability', 
+                                    'date',
+                                    'artist']);
+  
+  let keys = cryptoUtil.getKeys(properties.get('sKey'))
+  let signature = cryptoUtil.sign(selected, keys.private)
+
   console.log('Saving to fluree :', parsedData)
   let flureeHash = await cardanoProcessor.process(parsedData)
   let ipfsCid = await nftDataStore.upload(image.path)
-
+  
   let txnDetail = {
+    signature : signature,
     flureeHash : flureeHash,
     ipfsCid : ipfsCid
   }
