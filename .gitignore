@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+#Tmp files
+./cardano-tx-files
+./upload
