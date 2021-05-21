@@ -65,9 +65,9 @@ async function publish(data) {
   let ipfsCid = await nftDataStore.upload(image.path)
   
   let txnDetail = {
-    signature : signature,
-    flureeHash : flureeHash,
-    ipfsCid : ipfsCid
+    sig : signature,
+    fid : flureeHash,
+    cid : ipfsCid
   }
 
   let fileName = `../cardano-tx-files/${parsedData.name}.json`

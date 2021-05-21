@@ -3,6 +3,7 @@ app.secret=0PTsIIb+mRmzCbGfU6Vus2jVllom1fJ9Yu6x8HdUisjjXSfo1lQOA+LHIbGhB2mbn8N9N
 app.id=yIiASEfGiDNeVjPhydXIjRX8Y5Mdw2PA
 
 app.url=https://cardano-testnet.blockfrost.io/api/v0/txs/hash/metadata
+fluree.url=http://localhost:8090/fdb/test/cardano-nft/query
 
 logger.file=logger/app.log
 logger.access=logger/access.log

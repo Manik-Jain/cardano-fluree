@@ -13,9 +13,11 @@ export default class FileHandler {
 
     async write(fileName, data) {
         try {
-            fs.writeFile(path.resolve(fileName), JSON.stringify(data), (res) => {
-                console.log('File uploaded successfully...')
-            })
+            fs.writeFileSync(path.resolve(fileName), JSON.stringify(data), {encoding : 'utf-8'})
+
+            // fs.writeFile(path.resolve(fileName), JSON.stringify(data), (res) => {
+            //     console.log('File uploaded successfully...')
+            // })
         } catch (error) {
             throw new Error(error.toString())
         }

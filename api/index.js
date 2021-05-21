@@ -5,11 +5,13 @@ import got from 'got'
 import CardanoMessageProducer from '../kafka/producer/index.js'
 import CardanoCliExecutor from '../cmds/CardanoCliExecutor.js'
 import FileUtils from '../utils/fileHandler.js'
+import FlureeDao from './services/flureeDao.js'
 
 let router = express.Router()
 let cardanoMessageProducer = new CardanoMessageProducer()
 let cardanoCliExecutor = new CardanoCliExecutor()
 let fileUtils = new FileUtils()
+let flureeDao = new FlureeDao();
 
 app.use(router)
 
@@ -38,6 +40,7 @@ router.post('/', async (req, res, next) => {
 
     //TODO : perform cleanup from temp folder
     //cardanoCliExecutor.execute('rmdir /s/q ../upload/')
+
     return res.status(StatusCodes.OK).json({ message: 'ok' })
   } catch (error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -64,9 +67,20 @@ router.post('/data', async (req, res, next) => {
 
 router.get('/:hash', async (req, res, next) => {
   let hash = req.params.hash
-  let response = await getMetadata(hash)
+  //let response = await getMetadata(hash)
+
+  let response = {
+    "hash": {
+        "cid": "bafybeiespvwb2754lzo7xktianrmbu5jcn5xpt56yxb6csf7olo5cxfs5u",
+        "fid": "a2ba0262e167a584e2bd7b1699e3432b8bde40efcbdf0bcb3d94bda75dcbc91f"
+    }
+  }
+
+  let result = await flureeDao.fetch(response.hash)
+  console.log(result)
+
   return res.status(StatusCodes.OK).json({
-    hash: response.json_metadata,
+    result
   })
 })
 

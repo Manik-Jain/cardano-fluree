@@ -13,111 +13,14 @@ let flureeCrud = new FlureeCrud();
 
 //create a new Ledger
 //let ledger = await flureeCrud.create(conn, ledgerName);
- //console.log(ledger)
+// console.log(ledger)
 
 //delete a ledger
 //await flureeCrud.delete(conn, ledgerName);
 
-let imageDetails = [{
-  "_id": "_collection",
-  "name": "_artifact"
-},
-{
-  "_id": "_predicate",
-  "name": "_artifact/cid",
-  "doc": "Unique Id of the artifact",
-  "type": "string"
-},
-{
-  "_id": "_predicate",
-  "name": "_artifact/name",
-  "doc": "Name of the artifact",
-  "type": "string"
-},
-{
-  "_id": "_predicate",
-  "name": "_artifact/materials",
-  "doc": "Material used to create artifact",
-  "type": "string"
-},
-{
-  "_id": "_predicate",
-  "name": "_artifact/dimensions",
-  "doc": "Dimensions of artifact",
-  "type": "string"
-},
-{
-  "_id": "_predicate",
-  "name": "_artifact/weight",
-  "doc": "Weight of artifact",
-  "type": "string"
-},
-{
-  "_id": "_predicate",
-  "name": "_artifact/story",
-  "doc": "Story behind artifact",
-  "type": "string"
-},
 
-{
-  "_id": "_predicate",
-  "name": "_artifact/significance",
-  "doc": "Cultural significance of artifact",
-  "type": "string"
-},
 
-{
-  "_id": "_predicate",
-  "name": "_artifact/availability",
-  "doc": "Availability of artifact",
-  "type": "string"
-},
-{
-  "_id": "_predicate",
-  "name": "_artifact/date",
-  "doc": "Created date of artifact",
-  "type": "string"
-},
-
-{
-  "_id": "_predicate",
-  "name": "_artifact/artist",
-  "doc": "Artist detail",
-  "type": "string"
-}
-]
-
-let artistDetails = [{
-  "_id": "_collection",
-  "name": "_artist"
-},
-{
-  "_id": "_predicate",
-  "name": "_artifact/cid",
-  "doc": "Unique Id of the artist",
-  "type": "string"
-},
-{
-  "_id": "_predicate",
-  "name": "_artist/name",
-  "doc": "Artist name",
-  "type": "string"
-},
-{
-  "_id": "_predicate",
-  "name": "_artist/field",
-  "doc": "Artist field",
-  "type": "string"
-},
-{
-  "_id": "_predicate",
-  "name": "_artist/description",
-  "doc": "Artist description",
-  "type": "string"
-}
-]
-
-await flureeCrud.insertCollection(conn, ledgerName, imageDetails);
+//await flureeCrud.insertCollection(conn, ledgerName, artistDetails);
 
 // let imageDetails = [
 //     {
@@ -125,7 +28,7 @@ await flureeCrud.insertCollection(conn, ledgerName, imageDetails);
 //       name: 'Fire',
 //       artist: 'Manik Jain',
 //       materials: 'some random',
-//       dimensions: 'somehting',
+//       dimensions: 'somehting1',
 //       weight: '80 lb',
 //       story: 'story',
 //       significance: 'history',
@@ -133,11 +36,20 @@ await flureeCrud.insertCollection(conn, ledgerName, imageDetails);
 //       date: '11 Jan, 2020'
 //     }
 //   ];
-// await flureeCrud.insert(conn, ledgerName, imageDetails);
+
+  let artist = [{
+    _id: '_artist',
+    name: 'Manik Jain',
+    field: 'Iroquois Antler & Stone Carve',
+    description : 'I belong to the Seneca Deer Clan and live on the Cattaraugus Reservation in Perrysburg, NY'
+  }]
+let cid = await flureeCrud.insert(conn, ledgerName, artist);
+console.log(cid);
 
 // //Read inserted values
-//await flureeCrud.read(conn, ledgerName, '_artifact', 369435906932755);
-
+//const ledgerName = 'test/cardano-nft';
+//let data = await flureeCrud.read(conn, ledgerName, '_artifact', '13ccd1acb6b3fb47927cdff496d45aec309ead10dcb031beb3fe1692cce9fb5b');
+//console.log(data)
 // //close the connection instance
  flureeConnectionFactory.close(conn);
  process.exit(1);

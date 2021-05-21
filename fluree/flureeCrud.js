@@ -1,6 +1,5 @@
 import flureenjs from '@fluree/flureenjs';
-import { uuid } from 'uuidv4'; 
-import { sha256, sha224 } from 'js-sha256';
+import { sha256 } from 'js-sha256';
 
 export default class FlureeCrud {
 
@@ -16,15 +15,32 @@ export default class FlureeCrud {
         return ledger
     }
 
+    enrich(data) {
+       if(data) {
+            if(!Array.isArray(data)) {
+                data = [data]
+            }
+            
+            data.forEach(entry => {
+                let hash = sha256(JSON.stringify(entry))
+                entry = Object.assign(entry,{cid : hash})
+            })
+            return data
+       } else {
+           return data
+       }
+    }
+
     async insert(flureedb, ledgerName, data) {
-        let id = sha256(data)
-        console.log(id)
-        //data = Object.assign({id : id}, data)
-        data['id'] = id
+        data = this.enrich(data)
         console.log(data)
         var result = await flureenjs.transact(flureedb, ledgerName, data)
-        console.log(result)
-        return id
+        if(result.status === 200) {
+            return data[0].cid;
+        } else {
+            console.log(result)
+            return null
+        }
     }
 
     async insertCollection(flureedb, ledgerName, data) {
@@ -46,17 +62,18 @@ export default class FlureeCrud {
                         "date",
                         "significance",
                         "story",
-                        "dimensions"],
+                        "dimensions",
+                    "cid"],
             from    :   from
         };
         var result = await flureenjs.query(db, myQuery)
-        let filtered = result.filter((value) => value._id === filter)
+        let filtered = result.filter((value) => value.cid === filter)
 
         if(filtered) {
             delete filtered[0]._id
         }
 
-        return filtered
+        return filtered[0]
     }
 
     async delete(flureedb, ledgerName) {

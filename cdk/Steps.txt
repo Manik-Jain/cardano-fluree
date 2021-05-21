@@ -26,23 +26,33 @@ cardano-cli shelley query tip --testnet-magic 1097911063
 a) find the utxo for ur account bu querying from step 3
 b)Txn Draft
 cardano-cli shelley transaction build-raw \
---tx-in 956fe9ac00325aadadc6b7a9acfbc1fea371ad09fdb90203d6668f8523f2e7b5#0 \
+--tx-in e13b1ec55e64d0807895ba81435e4275839dd57b5bb915d924b58eb3e6b1f390#0 \
 --tx-out $(cat payment2.addr)+10 \
 --tx-out $(cat payment.addr)+0 \
 --ttl 0 \
 --fee 0 \
 --out-file tx.raw
 
+cardano-cli shelley transaction build-raw \
+--tx-in e13b1ec55e64d0807895ba81435e4275839dd57b5bb915d924b58eb3e6b1f390#0 \
+--tx-out $(cat payment.addr)+0 \
+--metadata-json-file tadodaho.json \
+--ttl 0 \
+--fee 0 \
+--out-file tadodaho.draft
+
 
 8. Calculate txn fee. We need the tx.raw file and protocol json file
 cardano-cli shelley transaction calculate-min-fee \
---tx-body-file tx.draft \
+--tx-body-file tadodaho.draft \
 --tx-in-count 1 \
 --tx-out-count 1 \
 --witness-count 1 \
 --byron-witness-count 0 \
 --testnet-magic 1097911063 \
 --protocol-params-file protocol.json
+
+178085 lovelace
 
 9. build txn with actual values now
 a) find out the slot number from query 6
@@ -57,23 +67,23 @@ cardano-cli shelley transaction build-raw \
 --out-file tx.draft
 
 cardano-cli shelley transaction build-raw \
---tx-in 956fe9ac00325aadadc6b7a9acfbc1fea371ad09fdb90203d6668f8523f2e7b5#0 \
---tx-out $(cat payment.addr)+999824599 \
---metadata-json-file metadata.json \
---ttl 26500000 \
---fee 175401 \
---out-file tx.draft
+--tx-in e13b1ec55e64d0807895ba81435e4275839dd57b5bb915d924b58eb3e6b1f390#0 \
+--tx-out $(cat payment.addr)+999646514 \
+--metadata-json-file tadodaho.json \
+--ttl 27000000 \
+--fee 178085 \
+--out-file tadodaho.draft
 
 //999824599
 
 10. Sign the transaction
 cardano-cli shelley transaction sign \
---tx-body-file tx.draft  \
+--tx-body-file tadodaho.draft  \
 --signing-key-file payment.skey \
 --testnet-magic 1097911063  \
---out-file txn.signed
+--out-file tadodaho.signed
 
 11. Submit
 cardano-cli transaction submit \
---tx-file txn.signed \
+--tx-file tadodaho.signed \
 --testnet-magic 1097911063

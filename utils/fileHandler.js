@@ -13,9 +13,7 @@ export default class FileUtil {
 
     async write(fileName, data) {
         try {
-            fs.writeFile(path.resolve(fileName), JSON.stringify(data), (res) => {
-                console.log('File uploaded successfully...')
-            })
+            fs.writeFileSync(path.resolve(fileName), JSON.stringify(data), {encoding : 'utf-8'})
         } catch (error) {
             throw new Error(error.toString())
         }
@@ -25,9 +23,6 @@ export default class FileUtil {
         try {
             console.log(fileName)
             let data = fs.readFileSync(path.resolve(fileName), {encoding : 'utf-8'})
-            // let data = await fs.promises.readFile(path.resolve(fileName), {
-            //     encoding: 'utf-8'
-            // });
             return JSON.parse(data)
         } catch (error) {
             console.log(error)
