@@ -1,4 +1,6 @@
 import flureenjs from '@fluree/flureenjs';
+import { uuid } from 'uuidv4'; 
+import { sha256, sha224 } from 'js-sha256';
 
 export default class FlureeCrud {
 
@@ -15,9 +17,20 @@ export default class FlureeCrud {
     }
 
     async insert(flureedb, ledgerName, data) {
+        let id = sha256(data)
+        console.log(id)
+        //data = Object.assign({id : id}, data)
+        data['id'] = id
+        console.log(data)
+        var result = await flureenjs.transact(flureedb, ledgerName, data)
+        console.log(result)
+        return id
+    }
+
+    async insertCollection(flureedb, ledgerName, data) {
+        
         var result = await flureenjs.transact(flureedb, ledgerName, data);
         console.log(result)
-        console.log(`Data inserted with id : [${result.flakes[0][0]}]`);
         return result.id
     }
 

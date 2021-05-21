@@ -18,7 +18,7 @@ export default avro.Type.forSchema({
       name: 'category',
       type: { 
           type: 'enum', 
-          symbols: ['ART', 'MUSIC', 'IDENTITY'] }
+          symbols: ['Art', 'Music', 'Identity'] }
     },
     {
       name: 'name',

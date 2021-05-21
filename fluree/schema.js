@@ -4,6 +4,12 @@ let imageDetails = [{
     },
     {
         "_id": "_predicate",
+        "name": "_artifact/id",
+        "doc": "Unique Id of the artifact",
+        "type": "string"
+    },
+    {
+        "_id": "_predicate",
         "name": "_artifact/name",
         "doc": "Name of the artifact",
         "type": "string"
@@ -62,25 +68,31 @@ let imageDetails = [{
 ]
 
 let artistDetails = [{
-    "_id": "_collection",
-    "name": "_artist"
-}, 
-{
-    "_id": "_predicate",
-    "name": "_artist/name",
-    "doc": "Artist name",
-    "type": "string"
-},
-{
-    "_id": "_predicate",
-    "name": "_artist/field",
-    "doc": "Artist field",
-    "type": "string"
-},
-{
-    "_id": "_predicate",
-    "name": "_artist/description",
-    "doc": "Artist description",
-    "type": "string"
-}
+        "_id": "_collection",
+        "name": "_artist"
+    },
+    {
+        "_id": "_predicate",
+        "name": "_artifact/id",
+        "doc": "Unique Id of the artist",
+        "type": "string"
+    },
+    {
+        "_id": "_predicate",
+        "name": "_artist/name",
+        "doc": "Artist name",
+        "type": "string"
+    },
+    {
+        "_id": "_predicate",
+        "name": "_artist/field",
+        "doc": "Artist field",
+        "type": "string"
+    },
+    {
+        "_id": "_predicate",
+        "name": "_artist/description",
+        "doc": "Artist description",
+        "type": "string"
+    }
 ]

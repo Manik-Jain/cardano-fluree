@@ -2,4 +2,4 @@ import NFTDataStore from './NFTDataStore.js'
 
 let ipfs = new NFTDataStore();
 
-ipfs.upload('./Cardano.png');
+ipfs.upload('../upload/TADODAHO.png');

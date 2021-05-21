@@ -2,7 +2,7 @@ import flureenjs from '@fluree/flureenjs';
 import {XMLHttpRequest} from 'xmlhttprequest';
 import ws from 'ws';
 import propertiesReader from 'properties-reader';
-
+ 
 var properties = propertiesReader('./properties.file');
 
 global.XMLHttpRequest = XMLHttpRequest;

@@ -12,23 +12,23 @@ export default class CardanoProcessor {
 
         switch(message.category) {
             
-            case 'ART' : 
+            case 'Art' : 
                 delete message.category
-
                 let data = [Object.assign({_id:'_artifact'}, message)]
                 txnHash = await flureeCrud.insert(conn, 'test/cardano-nft', data)
-                
+                console.log(txnHash)
                 break;
-            case 'MUSIC' : 
+            case 'Music' : 
                 //placeholder for next feature
                 break;
-            case 'IDENTITY' : 
+            case 'Identity' : 
                 //placeholder for next feature
                 break;
             default :
                 console.log(`Invalid case`)
                 return;
         }
+        console.log(txnHash)
         return txnHash;
     }
 }
